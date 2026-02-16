@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <ul>
+        <li><a href="/First">První stránka</a></li>
+        <li><a asp-page="/First">První stránka správně</a></li>
+        <li><a asp-page="/User/Index">Uživatelé</a></li>
+        <li><a asp-page="/User/Add">Přidání uživatele</a></li>
+        <li><a asp-page="/Value" asp-route-value="0">Hodnota</a></li>
+    </ul>
+</div>

@@ -1,0 +1,20 @@
+﻿@page "{value:int}"
+@model RazorFirst.Pages.ValueModel
+@{
+}
+
+<p>
+    <a asp-page-handler="Decrease" asp-route-value="@Model.Value">-</a> 
+    @Model.Value 
+    <a asp-page-handler="Increase" asp-route-value="@Model.Value">+</a>
+    <a asp-page="" asp-route-value="10">10</a>
+    <a asp-page="/Set">Nastavit</a>
+    @if (Model.Value % 2 == 0)
+    {
+        <span>Hodnota je sudá.</span>
+    }
+    else
+    {
+        <span>Hodnota je lichá.</span>
+    }
+</p>

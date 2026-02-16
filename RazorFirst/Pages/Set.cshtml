@@ -1,0 +1,15 @@
+﻿@page
+@model RazorFirst.Pages.SetModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label for="value" class="form-label">Hodnota:</label>
+        <input type="number" 
+            asp-for="Value"
+            name="value" 
+            value="@Model.Value" 
+            class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Nastavit</button>
+</form>
