@@ -6,10 +6,13 @@
     <div class="form-group">
         <label for="value" class="form-label">Hodnota:</label>
         <input type="number" 
-            asp-for="Value"
-            name="value" 
-            value="@Model.Value" 
+            asp-for="Input.Value"
             class="form-control" />
     </div>
+    <p>@Model.Input.Value</p>
     <button type="submit" class="btn btn-primary">Nastavit</button>
 </form>
+<!--
+                name="value"
+            value="@Model.Value"
+    -->

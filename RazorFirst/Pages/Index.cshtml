@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
+<div class="row">
+<div class="col text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <ul>
@@ -14,4 +14,25 @@
         <li><a asp-page="/User/Add">Přidání uživatele</a></li>
         <li><a asp-page="/Value" asp-route-value="0">Hodnota</a></li>
     </ul>
+</div>
+<div class="col">
+    @if (Model.Notes.Count == 0)
+    {
+        <p>Žádné poznámky</p>
+    }
+    else
+        {
+            @foreach (var note in Model.Notes)
+            {
+                <div class="card m-1">
+                    <div class="card-header">
+                        <h5 class="card-title">@note.Title</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>@note.Content</p>
+                    </div>
+                </div>
+            }
+        }    
+</div>
 </div>

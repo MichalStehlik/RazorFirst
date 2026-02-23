@@ -2,7 +2,12 @@
 @model RazorFirst.Pages.ValueModel
 @{
 }
-
+@if (!string.IsNullOrEmpty(Model.Success))
+{
+<div class="alert alert-success" role="alert">
+    @Model.Success
+</div>
+}
 <p>
     <a asp-page-handler="Decrease" asp-route-value="@Model.Value">-</a> 
     @Model.Value 
