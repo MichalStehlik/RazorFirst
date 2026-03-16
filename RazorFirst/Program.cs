@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RazorFirst.Data;
+using Microsoft.AspNetCore.Identity;
+using RazorFirst.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("Default")
         ));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(
+    options =>
+    {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 6; // 123456
+        options.User.RequireUniqueEmail = true;
+        options.Lockout.MaxFailedAccessAttempts = 5;
+    }
+    )
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

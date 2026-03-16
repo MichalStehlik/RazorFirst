@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorFirst.Data;
 using RazorFirst.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace RazorFirst.Pages
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly RazorFirst.Data.ApplicationDbContext _context;
@@ -47,10 +50,13 @@ namespace RazorFirst.Pages
             try
             {
                 _logger.LogInformation("Creating a new note with title: {Title}", Note.Title);
+                var userId = User?.Claims?.Where(c => c.Type == ClaimTypes.NameIdentifier)?.FirstOrDefault()?.Value;
+
                 Note input = new Note
                 {
                     Title = Note.Title,
                     Content = Note.Content,
+                    UserId = userId ?? "Unknown",
                     CreatedAt = DateTime.Now
                 };
                 _context.Notes.Add(input);

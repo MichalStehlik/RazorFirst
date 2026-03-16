@@ -30,7 +30,7 @@ namespace RazorFirst.Pages
             _logger.LogInformation("Index page accessed.");
             _logger.LogDebug("Fetching notes from the database.");
             _logger.LogDebug("Database context: {DbContext}", _db.Database.GetDbConnection().ConnectionString);
-            Notes = _db.Notes.ToList();
+            Notes = _db.Notes.Where(n => n.UserId == User!.Id).ToList();
         }
     }
 }
