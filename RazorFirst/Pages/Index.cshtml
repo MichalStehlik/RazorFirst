@@ -16,27 +16,34 @@
     </ul>
 </div>
 <div class="col">
+    @if (!User.Identity?.IsAuthenticated ?? true)
+{
+    <p>Pro zobrazení poznámek se prosím <a asp-page="/Account/Login" asp-area="Identity">přihlaste</a>.</p>
+}
+else
+{
     @if (Model.Notes.Count == 0)
     {
         <p>Žádné poznámky</p>
     }
     else
+    {
+        @foreach (var note in Model.Notes)
         {
-            @foreach (var note in Model.Notes)
-            {
-                <div class="card m-1">
-                    <div class="card-header flex-grow-1">
-                        <h5 class="card-title">@note.Title</h5>
-                        <a class="btn btn-sm btn-danger" asp-page="/Delete" asp-route-id="@note.NoteId">Odstranit</a>
-                    </div>
-                    <div class="card-body">
-                        <p>@note.Content</p>
-                    </div>
+            <div class="card m-1">
+                <div class="card-header flex-grow-1">
+                    <h5 class="card-title">@note.Title</h5>
+                    <a class="btn btn-sm btn-danger" asp-page="/Delete" asp-route-id="@note.NoteId">Odstranit</a>
                 </div>
-            }
-        } 
+                <div class="card-body">
+                    <p>@note.Content</p>
+                </div>
+            </div>
+        }
         <div>
-            </><a asp-page="/Create" class="btn btn-primary mt-2">Přidat poznámku</a>
+            <a asp-page="/Create" class="btn btn-primary mt-2">Přidat poznámku</a>
         </div>
+     }
+ }
 </div>
 </div>

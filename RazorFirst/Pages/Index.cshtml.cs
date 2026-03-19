@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorFirst.Data;
 using RazorFirst.Models;
+using System.Security.Claims;
 
 namespace RazorFirst.Pages
 {
@@ -22,15 +23,19 @@ namespace RazorFirst.Pages
         public IdentityUser User { get; set; }
         public void OnGet()
         {
-            User = HttpContext.User.Identity.IsAuthenticated
-                ? 
-                new IdentityUser { UserName = HttpContext.User.Identity.Name } 
-                : 
-                null;
             _logger.LogInformation("Index page accessed.");
+
+            if (!HttpContext.User.Identity?.IsAuthenticated ?? true)
+            {
+                return;
+            }
+
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             _logger.LogDebug("Fetching notes from the database.");
             _logger.LogDebug("Database context: {DbContext}", _db.Database.GetDbConnection().ConnectionString);
-            Notes = _db.Notes.Where(n => n.UserId == User!.Id).ToList();
+
+            Notes = _db.Notes.Where(n => n.UserId == userId).ToList();
         }
     }
 }
