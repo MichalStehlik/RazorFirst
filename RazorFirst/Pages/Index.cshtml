@@ -14,6 +14,11 @@
         <li><a asp-page="/User/Add">Přidání uživatele</a></li>
         <li><a asp-page="/Value" asp-route-value="0">Hodnota</a></li>
     </ul>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <p>Přihlášen jako: @User.Identity.Name</p>
+            <p>Role: @string.Join(", ", User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value))</p>
+        }
 </div>
 <div class="col">
     @if (!User.Identity?.IsAuthenticated ?? true)

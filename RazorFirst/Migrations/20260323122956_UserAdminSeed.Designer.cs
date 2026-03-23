@@ -12,8 +12,8 @@ using RazorFirst.Data;
 namespace RazorFirst.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260316132716_Firstname")]
-    partial class Firstname
+    [Migration("20260323122956_UserAdminSeed")]
+    partial class UserAdminSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,15 @@ namespace RazorFirst.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "00000000-0000-0000-0000-000000000001",
+                            ConcurrencyStamp = "b5f4a80e-9d07-408f-9fca-68c9ff42a409",
+                            Name = "Administrátor",
+                            NormalizedName = "ADMINISTRÁTOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -233,6 +242,26 @@ namespace RazorFirst.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "00000000-0000-0000-0001-000000000001",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7784883b-8c73-42e5-8840-ce37af504d54",
+                            Email = "ADMIN@X.TEST",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@X.TEST",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJT0xUYs3nNZ5svpNcXya++oJnN8CHnxMv/SSKlt+pXB6c3x1cJZEGSQHGItH2w0gg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c400db21-67ec-4eed-aad9-d8a1cfd64bc4",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@x.test"
+                        });
                 });
 
             modelBuilder.Entity("RazorFirst.Models.Note", b =>

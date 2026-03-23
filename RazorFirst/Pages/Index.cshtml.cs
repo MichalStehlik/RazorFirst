@@ -20,7 +20,7 @@ namespace RazorFirst.Pages
         }
 
         public List<Note> Notes { get; set; }
-        public IdentityUser User { get; set; }
+        public ApplicationUser User { get; set; }
         public void OnGet()
         {
             _logger.LogInformation("Index page accessed.");

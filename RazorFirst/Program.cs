@@ -11,7 +11,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder.Configuration.GetConnectionString("Default")
         ));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>( // <-- Musí být AddIdentity, ne AddDefaultIdentity
+                                                             // AddDefaultIdentity nopodporuje role, proto musíme použít AddIdentity
     options =>
     {
         options.SignIn.RequireConfirmedAccount = true;
@@ -24,7 +25,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(
         options.Lockout.MaxFailedAccessAttempts = 5;
     }
     )
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

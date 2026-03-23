@@ -12,8 +12,8 @@ using RazorFirst.Data;
 namespace RazorFirst.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260316132716_Firstname")]
-    partial class Firstname
+    [Migration("20260323121449_RoleSeed")]
+    partial class RoleSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,15 @@ namespace RazorFirst.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "00000000-0000-0000-0000-000000000001",
+                            ConcurrencyStamp = "d2326dd0-2d9d-46bd-98e1-388cc6a876d3",
+                            Name = "Administrátor",
+                            NormalizedName = "ADMINISTRÁTOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
